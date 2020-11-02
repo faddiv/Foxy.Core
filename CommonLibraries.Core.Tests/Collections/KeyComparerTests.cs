@@ -1,6 +1,6 @@
 using FluentAssertions;
 using Moq;
-using NorthwindDatabase;
+using NorthwindEFCoreSqlite;
 using System;
 using System.Collections.Generic;
 using Xunit;
@@ -14,7 +14,7 @@ namespace CommonLibraries.Core.Collections
         public void Ctor_keySelector_required()
         {
 
-            Action f = () => new KeyComparer<Customers, string>(null);
+            Action f = () => new KeyComparer<Customer, string>(null);
 
             f.Should().Throw<ArgumentNullException>();
         }
@@ -22,10 +22,10 @@ namespace CommonLibraries.Core.Collections
         [Fact]
         public void Compare_calls_key_selector_on_both_model()
         {
-            var keySelector = new Mock<Func<Customers, string>>();
-            var comparer = new KeyComparer<Customers, string>(keySelector.Object);
-            var customer1 = new Customers { CustomerId = "2" };
-            var customer2 = new Customers { CustomerId = "1" };
+            var keySelector = new Mock<Func<Customer, string>>();
+            var comparer = new KeyComparer<Customer, string>(keySelector.Object);
+            var customer1 = new Customer { CustomerId = "2" };
+            var customer2 = new Customer { CustomerId = "1" };
 
             comparer.Compare(customer1, customer2);
 
@@ -39,9 +39,9 @@ namespace CommonLibraries.Core.Collections
         [InlineData("4", "4")]
         public void Compare_compares_the_keys(string leftKey, string rightKey)
         {
-            var comparer = new KeyComparer<Customers, string>(model => model.CustomerId);
-            var customer1 = new Customers { CustomerId = leftKey };
-            var customer2 = new Customers { CustomerId = rightKey };
+            var comparer = new KeyComparer<Customer, string>(model => model.CustomerId);
+            var customer1 = new Customer { CustomerId = leftKey };
+            var customer2 = new Customer { CustomerId = rightKey };
 
             var result = comparer.Compare(customer1, customer2);
 
@@ -51,10 +51,10 @@ namespace CommonLibraries.Core.Collections
         [Fact]
         public void SortByKey_sorts_the_list_by_key()
         {
-            var customer1 = new Customers { CustomerId = "1" };
-            var customer2 = new Customers { CustomerId = "2" };
-            var customer3 = new Customers { CustomerId = "3" };
-            var list = new List<Customers> { customer2, customer3, customer1 };
+            var customer1 = new Customer { CustomerId = "1" };
+            var customer2 = new Customer { CustomerId = "2" };
+            var customer3 = new Customer { CustomerId = "3" };
+            var list = new List<Customer> { customer2, customer3, customer1 };
 
             list.SortByKey(e => e.CustomerId);
 
@@ -64,9 +64,9 @@ namespace CommonLibraries.Core.Collections
         [Fact]
         public void SortByKey_sorts_the_array_by_key()
         {
-            var customer1 = new Customers { CustomerId = "1" };
-            var customer2 = new Customers { CustomerId = "2" };
-            var customer3 = new Customers { CustomerId = "3" };
+            var customer1 = new Customer { CustomerId = "1" };
+            var customer2 = new Customer { CustomerId = "2" };
+            var customer3 = new Customer { CustomerId = "3" };
             var list = new [] { customer2, customer3, customer1 };
 
             list.SortByKey(e => e.CustomerId);

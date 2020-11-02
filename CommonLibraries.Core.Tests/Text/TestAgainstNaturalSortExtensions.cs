@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using System;
 using System.Linq;
 using Xunit;
@@ -10,7 +10,7 @@ namespace CommonLibraries.Core.Text
         private static void BaseTest(string[] input, string[] sorted)
         {
             var NaturalSortExtensionComparer =
-                NaturalSort.Extension.StringComparerNaturalSortExtension
+                NaturalSort.Extension.NaturalSortExtension
                 .WithNaturalSort(StringComparer.CurrentCulture);
             var expected = input.OrderBy(x => x, NaturalSortExtensionComparer).ToArray();
             expected.Should().BeEquivalentTo(sorted, "The original algorithm should result according the original tests");

@@ -1,4 +1,4 @@
-﻿using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Attributes;
 using System.Collections.Generic;
 
 namespace StringNaturalComparerNS
@@ -7,7 +7,7 @@ namespace StringNaturalComparerNS
     public class BigNumberBenchmarks : BenchmarksBase
     {
         private readonly IComparer<string> stringNaturalComparer = CommonLibraries.Core.Text.StringNaturalComparer.Ordinal;
-        private readonly IComparer<string> naturalSortExtension = NaturalSort.Extension.StringComparerNaturalSortExtension.WithNaturalSort(System.StringComparer.CurrentCulture);
+        private readonly IComparer<string> naturalSortExtension = NaturalSort.Extension.NaturalSortExtension.WithNaturalSort(System.StringComparer.CurrentCulture);
         private readonly IComparer<string> pInvokeComparer = new PInvokeComparer();
 
         private string[][] dataSets = new[] {

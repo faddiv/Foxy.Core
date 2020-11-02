@@ -1,8 +1,7 @@
-using CommonLibraries.Testing.EntityFrameworkCore.Tests;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using NorthwindDatabase;
+using NorthwindEFCoreSqlite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,15 +10,25 @@ using Xunit;
 
 namespace CommonLibraries.Core.Linq
 {
-    public class LeftJoinTests
+    public class LeftJoinTests : IDisposable
     {
-        static NorthWindDatabaseFactory factory = new NorthWindDatabaseFactory(new DatabaseScaffold());
+
+        private NorthwindContext db;
+        public LeftJoinTests()
+        {
+            db = CreateDb();
+        }
+
+        public void Dispose()
+        {
+            db.Dispose();
+        }
 
         [Fact]
         public void Enumerable_LeftJoin_works_as_left_join()
         {
-            var list1 = GetList();
-            var list2 = list1.SelectMany(e => e.OrderDetails).ToList();
+            var list1 = GetOrders();
+            var list2 = GetOrderDetails();
             list2.RemoveRange(list2.Count / 2, list2.Count / 2);
 
             var result = list1
@@ -33,12 +42,12 @@ namespace CommonLibraries.Core.Linq
         [Fact]
         public void Enumerable_LeftJoin_requires_all_arguments()
         {
-            var list1 = GetList();
-            var list2 = list1.SelectMany(e => e.OrderDetails).ToList();
+            var list1 = GetOrders();
+            var list2 = GetOrderDetails();
 
             Assert.Throws<ArgumentNullException>("outer", () =>
             {
-                Orders[] outer = null;
+                Order[] outer = null;
                 return outer
                     .LeftJoin(list2, l => l.OrderId, l => l.OrderId, (o, i) => new { o, i })
                     .ToList();
@@ -47,7 +56,7 @@ namespace CommonLibraries.Core.Linq
             Assert.Throws<ArgumentNullException>("inner", () =>
             {
                 return list1
-                    .LeftJoin((OrderDetails[])null, l => l.OrderId, l => l.OrderId, (o, i) => new { o, i })
+                    .LeftJoin((OrderDetail[])null, l => l.OrderId, l => l.OrderId, (o, i) => new { o, i })
                     .ToList();
             });
 
@@ -66,7 +75,7 @@ namespace CommonLibraries.Core.Linq
             });
             Assert.Throws<ArgumentNullException>("resultSelector", () =>
             {
-                Func<Orders, OrderDetails, object> resultSelector = null;
+                Func<Order, OrderDetail, object> resultSelector = null;
                 return list1
                     .LeftJoin(list2, l => l.OrderId, l => l.OrderId, resultSelector)
                     .ToList();
@@ -76,15 +85,15 @@ namespace CommonLibraries.Core.Linq
         [Fact]
         public void Enumerable_LeftJoin_uses_equality_comparer()
         {
-            var list1 = GetList();
-            var list2 = list1.SelectMany(e => e.OrderDetails).ToList();
+            var list1 = GetOrders().Take(2).ToList();
+            var list2 = GetOrderDetails().FindAll(e => list1.Any(o => o.OrderId == e.OrderId));
             var comparer = CreateComparer();
 
             var result = list1
                 .LeftJoin(list2, l => l.OrderId, l => l.OrderId, (o, i) => new { o, i }, comparer.Object)
                 .ToList();
 
-            comparer.Verify(e => e.Equals(It.IsAny<int>(), It.IsAny<int>()), Times.AtLeastOnce);
+            comparer.Verify(e => e.Equals(It.IsAny<long>(), It.IsAny<long>()), Times.AtLeastOnce);
         }
 
         [Fact]
@@ -93,8 +102,8 @@ namespace CommonLibraries.Core.Linq
             using (var db = CreateDb())
             {
 
-                var orderDetails = db.Orders.Take(10).SelectMany(e => e.OrderDetails).ToList();
-                db.RemoveRange(orderDetails);
+                var OrderDetail = db.OrderDetails.Take(10).ToList();
+                db.RemoveRange(OrderDetail);
                 db.SaveChanges();
 
                 var result = db.Orders
@@ -109,24 +118,24 @@ namespace CommonLibraries.Core.Linq
         [Fact]
         public void Queriable_LeftJoin_uses_comparer()
         {
-            var list1 = GetList();
-            var list2 = list1.SelectMany(e => e.OrderDetails).ToList();
+            var list1 = GetOrders().Take(2).ToList();
+            var list2 = GetOrderDetails().FindAll(e => list1.Any(o => o.OrderId == e.OrderId));
             var comparer = CreateComparer();
 
             var result = list1
                 .LeftJoin(list2, l => l.OrderId, l => l.OrderId, (o, i) => new { o, i }, comparer.Object)
                 .ToList();
 
-            comparer.Verify(e => e.Equals(It.IsAny<int>(), It.IsAny<int>()), Times.AtLeastOnce);
+            comparer.Verify(e => e.Equals(It.IsAny<long>(), It.IsAny<long>()), Times.AtLeastOnce);
         }
 
-        private static Mock<IEqualityComparer<int>> CreateComparer()
+        private static Mock<IEqualityComparer<long>> CreateComparer()
         {
-            var comparer = new Mock<IEqualityComparer<int>>();
-            comparer.Setup(e => e.Equals(It.IsAny<int>(), It.IsAny<int>()))
-                .Returns((int x, int y) => EqualityComparer<int>.Default.Equals(x, y));
-            comparer.Setup(e => e.GetHashCode(It.IsAny<int>()))
-                .Returns((int x) => EqualityComparer<int>.Default.GetHashCode(x));
+            var comparer = new Mock<IEqualityComparer<long>>();
+            comparer.Setup(e => e.Equals(It.IsAny<long>(), It.IsAny<long>()))
+                .Returns((long x, long y) => EqualityComparer<long>.Default.Equals(x, y));
+            comparer.Setup(e => e.GetHashCode(It.IsAny<long>()))
+                .Returns((long x) => EqualityComparer<long>.Default.GetHashCode(x));
             return comparer;
         }
 
@@ -138,7 +147,7 @@ namespace CommonLibraries.Core.Linq
             var list2 = db.OrderDetails;
             Assert.Throws<ArgumentNullException>("outer", () =>
             {
-                DbSet<Orders> outer = null;
+                DbSet<Order> outer = null;
                 return outer
                     .LeftJoin(list2, l => l.OrderId, l => l.OrderId, (o, i) => new { o, i })
                     .ToList();
@@ -147,7 +156,7 @@ namespace CommonLibraries.Core.Linq
             Assert.Throws<ArgumentNullException>("inner", () =>
             {
                 return list1
-                    .LeftJoin((OrderDetails[])null, l => l.OrderId, l => l.OrderId, (o, i) => new { o, i })
+                    .LeftJoin((OrderDetail[])null, l => l.OrderId, l => l.OrderId, (o, i) => new { o, i })
                     .ToList();
             });
 
@@ -166,7 +175,7 @@ namespace CommonLibraries.Core.Linq
             });
             Assert.Throws<ArgumentNullException>("resultSelector", () =>
             {
-                Expression<Func<Orders, OrderDetails, object>> resultSelector = null;
+                Expression<Func<Order, OrderDetail, object>> resultSelector = null;
                 return list1
                     .LeftJoin(list2, l => l.OrderId, l => l.OrderId, resultSelector)
                     .ToList();
@@ -174,25 +183,22 @@ namespace CommonLibraries.Core.Linq
         }
 
 
-        private static TestDbContext CreateDb()
+        private static NorthwindContext CreateDb()
         {
-            return factory.CreateDbContext();
+            return new NorthwindContext();
         }
 
-        private static List<Orders> GetList()
+        private List<Order> GetOrders()
         {
-            var db = CreateDb();
             return db.Orders
-                .Include(e => e.OrderDetails)
                 .ToList();
         }
 
-        private static List<OrderDetails> GetList2()
+        private List<OrderDetail> GetOrderDetails()
         {
-            var db = CreateDb();
             return db.OrderDetails
-                .Include(e => e.Order)
                 .ToList();
         }
+
     }
 }

@@ -1,4 +1,4 @@
-﻿using CommonLibraries.Core.Text.TestHelpers;
+using CommonLibraries.Core.Text.TestHelpers;
 using FluentAssertions;
 using System;
 using Xunit;
@@ -66,7 +66,7 @@ namespace CommonLibraries.Core.Text
             // The natural short part is not tested because the basic comparer doesnt support it.
             var stringComparer = StringComparer.InvariantCultureIgnoreCase;
             var naturalSortExtensionComparer =
-                NaturalSort.Extension.StringComparerNaturalSortExtension
+                NaturalSort.Extension.NaturalSortExtension
                 .WithNaturalSort(StringComparer.InvariantCultureIgnoreCase);
             var stringNaturalComparer = StringNaturalComparer.InvariantCultureIgnoreCase;
             var pinvokeComparer = new PInvokeComparer();
