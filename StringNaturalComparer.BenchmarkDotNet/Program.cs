@@ -1,4 +1,5 @@
-﻿using BenchmarkDotNet.Running;
+using BenchmarkDotNet.Running;
+using System;
 using System.Diagnostics;
 using System.IO;
 
@@ -8,7 +9,15 @@ namespace StringNaturalComparerNS
     {
         public static void Main(string[] args)
         {
-            var benchmark  = typeof(StringComparerBenchmarks);
+            Type benchmark;
+            if (args.Length == 1)
+            {
+                var assembly = typeof(Program).Assembly;
+                benchmark = assembly.GetType(args[0]);
+            } else
+            {
+                benchmark = typeof(StringComparerBenchmarks);
+            }
             BenchmarkRunner.Run(benchmark);
             var processStartInfo = new ProcessStartInfo(
                 "c:\\Program Files\\R\\R-3.6.2\\bin\\Rscript.exe",
