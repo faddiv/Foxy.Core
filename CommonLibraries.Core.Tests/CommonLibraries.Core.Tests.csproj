@@ -37,7 +37,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\CommonLibraries.Testing.EntityFrameworkCore\NorthWindDatabaseFactory\NorthWindDatabaseFactory.csproj" />
     <ProjectReference Include="..\CommonLibraries.Core\CommonLibraries.Core.csproj" />
-    <ProjectReference Include="..\NorthwindDatabase\NorthwindDatabase.csproj" />
   </ItemGroup>
 
   <ItemGroup>
