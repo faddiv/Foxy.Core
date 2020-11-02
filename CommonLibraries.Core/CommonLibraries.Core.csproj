@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Viktor Faddi</Authors>
+    <Company />
+    <Description>This package contains the following apis: Collection related extensions, Disposable related api, string natural comparer.</Description>
+    <PackageTags>LeftJoin</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Viktor Faddi</Copyright>
+    <RepositoryUrl>https://github.com/CommonLibraries/CommonLibraries</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net40'">
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Update="Cleanup\AddEventSubscription.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddEventSubscription.tt</DependentUpon>
+    </Compile>
+    <None Update="Cleanup\AddEventSubscription.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AddEventSubscription.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+</Project>
