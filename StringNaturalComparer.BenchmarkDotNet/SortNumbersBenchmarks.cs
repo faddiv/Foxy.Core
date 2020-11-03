@@ -3,14 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 
-namespace StringNaturalComparerNS
+namespace NaturalStringComparerNS
 {
     [ArtifactsPath(".\\SortNumbersBenchmarks")]
     public class SortNumbersBenchmarks : BenchmarksBase
     {
-        private readonly IComparer<string> stringNaturalComparer = CommonLibraries.Core.Text.StringNaturalComparer.InvariantCultureIgnoreCase;
+        private readonly IComparer<string> naturalStringComparer = Foxy.Core.Text.NaturalStringComparer.InvariantCultureIgnoreCase;
         private readonly IComparer<string> naturalSortExtension = NaturalSort.Extension.NaturalSortExtension.WithNaturalSort(System.StringComparer.InvariantCultureIgnoreCase);
         private readonly IComparer<string> pInvokeComparer = new PInvokeComparer();
         private readonly IComparer<string> stringComparer = System.StringComparer.InvariantCultureIgnoreCase;
@@ -50,9 +49,9 @@ namespace StringNaturalComparerNS
         }
 
         [Benchmark]
-        public string[] StringNaturalComparer()
+        public string[] NaturalStringComparer()
         {
-            return stringsToSort.OrderBy(e => e, stringNaturalComparer).ToArray();
+            return stringsToSort.OrderBy(e => e, naturalStringComparer).ToArray();
         }
 
         [Benchmark]

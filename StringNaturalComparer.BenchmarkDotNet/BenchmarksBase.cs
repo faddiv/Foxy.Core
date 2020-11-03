@@ -1,9 +1,9 @@
-﻿using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Mathematics;
 using BenchmarkDotNet.Order;
 using Perfolizer.Mathematics.OutlierDetection;
 
-namespace StringNaturalComparerNS
+namespace NaturalStringComparerNS
 {
     [HtmlExporter, RPlotExporter]
     [Orderer(SummaryOrderPolicy.Default)]

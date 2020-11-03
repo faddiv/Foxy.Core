@@ -1,11 +1,11 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using System;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using Xunit;
 
-namespace CommonLibraries.Core.Text
+namespace Foxy.Core.Text
 {
     public partial class StringComparerExperiments
     {

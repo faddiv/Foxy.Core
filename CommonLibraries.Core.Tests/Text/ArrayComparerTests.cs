@@ -1,9 +1,9 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using System;
 using System.Linq;
 using Xunit;
 
-namespace CommonLibraries.Core.Text
+namespace Foxy.Core.Text
 {
     public class ArrayComparerTests
     {

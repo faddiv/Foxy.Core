@@ -1,65 +1,65 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 
-namespace CommonLibraries.Core.Text
+namespace Foxy.Core.Text
 {
     /// <summary>
     /// Enhances string comparer with natural sorting functionality,
     /// which allows it to sort numbers inside the strings as numbers, not as letters.
     /// (e.g. "1", "2", "10" instead of "1", "10", "2")
     /// </summary>
-    public class StringNaturalComparer : StringComparer
+    public class NaturalStringComparer : StringComparer
     {
         /// <summary>
-        /// Gets a <see cref="StringNaturalComparer"/> object that performs 
+        /// Gets a <see cref="NaturalStringComparer"/> object that performs 
         /// a case-sensitive string comparison using the word comparison rules of 
         /// the current culture.
         /// </summary>
-        public new static StringNaturalComparer CurrentCulture
-                    => new StringNaturalComparer(CompareOptions.None, CultureInfo.CurrentCulture);
+        public new static NaturalStringComparer CurrentCulture
+                    => new NaturalStringComparer(CompareOptions.None, CultureInfo.CurrentCulture);
 
         /// <summary>
-        /// Gets a <see cref="StringNaturalComparer"/> object that performs 
+        /// Gets a <see cref="NaturalStringComparer"/> object that performs 
         /// a case-insensitive string comparison using the word comparison rules of 
         /// the current culture.
         /// </summary>
-        public new static StringNaturalComparer CurrentCultureIgnoreCase
-                    => new StringNaturalComparer(CompareOptions.IgnoreCase, CultureInfo.CurrentCulture);
+        public new static NaturalStringComparer CurrentCultureIgnoreCase
+                    => new NaturalStringComparer(CompareOptions.IgnoreCase, CultureInfo.CurrentCulture);
 
 #if !NETSTANDARD1_3
         /// <summary>
-        /// Gets a <see cref="StringNaturalComparer"/> object that performs 
+        /// Gets a <see cref="NaturalStringComparer"/> object that performs 
         /// a case-sensitive string natural comparison using the word comparison rules of 
         /// the invariant culture.
         /// </summary>
-        public new static StringNaturalComparer InvariantCulture
-                    => new StringNaturalComparer(CompareOptions.None, CultureInfo.InvariantCulture);
+        public new static NaturalStringComparer InvariantCulture
+                    => new NaturalStringComparer(CompareOptions.None, CultureInfo.InvariantCulture);
 
         /// <summary>
-        /// Gets a <see cref="StringNaturalComparer"/> object that performs 
+        /// Gets a <see cref="NaturalStringComparer"/> object that performs 
         /// a case-insensitive string natural comparison using the word comparison rules of 
         /// the invariant culture.
         /// </summary>
-        public new static StringNaturalComparer InvariantCultureIgnoreCase
-                    => new StringNaturalComparer(CompareOptions.IgnoreCase, CultureInfo.InvariantCulture);
+        public new static NaturalStringComparer InvariantCultureIgnoreCase
+                    => new NaturalStringComparer(CompareOptions.IgnoreCase, CultureInfo.InvariantCulture);
 #endif
         /// <summary>
-        /// Gets a <see cref="StringNaturalComparer"/> object that performs 
+        /// Gets a <see cref="NaturalStringComparer"/> object that performs 
         /// a case-sensitive ordinal string natural comparison.
         /// </summary>
-        public new static StringNaturalComparer Ordinal
-                    => new StringNaturalComparer(CompareOptions.None);
+        public new static NaturalStringComparer Ordinal
+                    => new NaturalStringComparer(CompareOptions.None);
 
         /// <summary>
-        /// Gets a <see cref="StringNaturalComparer"/> object that performs 
+        /// Gets a <see cref="NaturalStringComparer"/> object that performs 
         /// a case-insensitive ordinal string natural comparison.
         /// </summary>
-        public new static StringNaturalComparer OrdinalIgnoreCase
-                    => new StringNaturalComparer(CompareOptions.IgnoreCase);
+        public new static NaturalStringComparer OrdinalIgnoreCase
+                    => new NaturalStringComparer(CompareOptions.IgnoreCase);
 
         /// <summary>
-        ///     Creates a <see cref="StringNaturalComparer"/> object that compares 
+        ///     Creates a <see cref="NaturalStringComparer"/> object that compares 
         ///     strings according to the rules of a specified culture.
         /// </summary>
         /// <param name="culture">
@@ -71,14 +71,14 @@ namespace CommonLibraries.Core.Text
         ///     False to specify that comparison operations be case-sensitive.
         /// </param>
         /// <returns>
-        ///     A new <see cref="StringNaturalComparer"/> object that performs 
+        ///     A new <see cref="NaturalStringComparer"/> object that performs 
         ///     string natural comparisons according to the comparison rules used by 
         ///     the culture parameter and the case rule specified by the ignoreCase 
         ///     parameter.
         /// </returns>
-        public new static StringNaturalComparer Create(CultureInfo culture, bool ignoreCase)
+        public new static NaturalStringComparer Create(CultureInfo culture, bool ignoreCase)
         {
-            return new StringNaturalComparer(
+            return new NaturalStringComparer(
                 ignoreCase ? CompareOptions.IgnoreCase : CompareOptions.None,
                 culture);
         }
@@ -92,7 +92,7 @@ namespace CommonLibraries.Core.Text
         private readonly ushort[] _mappings;
 
 
-        private StringNaturalComparer(CompareOptions options, CultureInfo culture = null)
+        private NaturalStringComparer(CompareOptions options, CultureInfo culture = null)
         {
             _options = options;
             _ignoreCase = _options.HasFlag(CompareOptions.IgnoreCase);

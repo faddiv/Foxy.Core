@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using Xunit;
 
-namespace CommonLibraries.Core.Text
+namespace Foxy.Core.Text
 {
     public class TestAgainstNaturalSortExtensions
     {
@@ -14,8 +14,8 @@ namespace CommonLibraries.Core.Text
                 .WithNaturalSort(StringComparer.CurrentCulture);
             var expected = input.OrderBy(x => x, NaturalSortExtensionComparer).ToArray();
             expected.Should().BeEquivalentTo(sorted, "The original algorithm should result according the original tests");
-            var actual = input.OrderBy(x => x, StringNaturalComparer.CurrentCulture).ToArray();
-            actual.Should().BeEquivalentTo(expected, "the StringNaturalComparer should behave same way as NaturalSortExtension");
+            var actual = input.OrderBy(x => x, NaturalStringComparer.CurrentCulture).ToArray();
+            actual.Should().BeEquivalentTo(expected, "the NaturalStringComparer should behave same way as NaturalSortExtension");
         }
 
         [Theory]

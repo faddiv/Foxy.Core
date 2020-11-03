@@ -4,7 +4,7 @@ using FluentAssertions.Primitives;
 using System;
 using System.Collections.Generic;
 
-namespace CommonLibraries.Core.Text.TestHelpers
+namespace Foxy.Core.Text.TestHelpers
 {
     public static class ComparerAssertionExtensions
     {

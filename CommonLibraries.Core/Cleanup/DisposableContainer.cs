@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace CommonLibraries.Core.Cleanup
+namespace Foxy.Core.Cleanup
 {
     /// <summary>
     /// A class that holds multiple <see cref="IDisposable"/> object that needs to disposed together 

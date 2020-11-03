@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CommonLibraries.Core.Cleanup
+namespace Foxy.Core.Cleanup
 {
     partial class DisposableContainerExtensions
     {

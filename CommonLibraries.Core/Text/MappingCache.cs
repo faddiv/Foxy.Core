@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
-namespace CommonLibraries.Core.Text
+namespace Foxy.Core.Text
 {
     internal class MappingCache
     {

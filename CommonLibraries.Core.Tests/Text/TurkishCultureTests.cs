@@ -1,18 +1,18 @@
-﻿using CommonLibraries.Core.Text.TestHelpers;
+using Foxy.Core.Text.TestHelpers;
 using System.Globalization;
 using Xunit;
 
-namespace CommonLibraries.Core.Text
+namespace Foxy.Core.Text
 {
     public class TurkishCultureTests
     {
         private static readonly CultureInfo turkish =
             CultureInfo.GetCultureInfo("tr-TR");
-        private StringNaturalComparer Comparer { get; }
+        private NaturalStringComparer Comparer { get; }
 
         public TurkishCultureTests()
         {
-            Comparer = StringNaturalComparer.Create(turkish, true);
+            Comparer = NaturalStringComparer.Create(turkish, true);
         }
 
         [Theory]

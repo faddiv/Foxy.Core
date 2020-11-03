@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace CommonLibraries.Core.Cleanup
+namespace Foxy.Core.Cleanup
 {
     /// <summary>
     /// Wrap a method in a <see cref="IDisposable"/> class so it is called on Dispose.

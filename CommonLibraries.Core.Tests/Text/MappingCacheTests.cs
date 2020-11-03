@@ -1,8 +1,8 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using System.Globalization;
 using Xunit;
 
-namespace CommonLibraries.Core.Text
+namespace Foxy.Core.Text
 {
     public class MappingCacheTests
     {

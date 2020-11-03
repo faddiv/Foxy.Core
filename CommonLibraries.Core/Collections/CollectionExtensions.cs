@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace CommonLibraries.Core.Collections
+namespace Foxy.Core.Collections
 {
     public static class CollectionExtensions
     {

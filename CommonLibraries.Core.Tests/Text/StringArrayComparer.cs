@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace CommonLibraries.Core.Text
+namespace Foxy.Core.Text
 {
     public partial class StringComparerExperiments
     {

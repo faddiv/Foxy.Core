@@ -1,14 +1,14 @@
-﻿using CommonLibraries.Core.Text.TestHelpers;
+using Foxy.Core.Text.TestHelpers;
 using FluentAssertions;
 using System;
 using Xunit;
 
-namespace CommonLibraries.Core.Text
+namespace Foxy.Core.Text
 {
-    public class OrdinalIgnoreCaseTests : StringNaturalComparerCommonTests
+    public class OrdinalIgnoreCaseTests : NaturalStringComparerCommonTests
     {
         public OrdinalIgnoreCaseTests() : base(
-            StringNaturalComparer.OrdinalIgnoreCase,
+            NaturalStringComparer.OrdinalIgnoreCase,
             StringComparer.OrdinalIgnoreCase)
         {
         }

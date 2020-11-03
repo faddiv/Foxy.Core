@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace CommonLibraries.Core.Text
+namespace Foxy.Core.Text
 {
     internal class CacheKey : IEquatable<CacheKey>
     {

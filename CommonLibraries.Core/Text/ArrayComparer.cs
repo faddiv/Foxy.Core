@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CommonLibraries.Core.Text
+namespace Foxy.Core.Text
 {
     internal class ArrayComparer
     {

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -9,7 +9,7 @@
 
     <OutputType>Library</OutputType>
 
-    <RootNamespace>CommonLibraries.Core</RootNamespace>
+    <RootNamespace>Foxy.Core</RootNamespace>
 
   </PropertyGroup>
 
@@ -36,7 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CommonLibraries.Core\CommonLibraries.Core.csproj" />
+    <ProjectReference Include="..\CommonLibraries.Core\Foxy.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

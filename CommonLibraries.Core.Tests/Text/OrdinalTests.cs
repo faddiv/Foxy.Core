@@ -1,13 +1,13 @@
-﻿using CommonLibraries.Core.Text.TestHelpers;
+using Foxy.Core.Text.TestHelpers;
 using System;
 using Xunit;
 
-namespace CommonLibraries.Core.Text
+namespace Foxy.Core.Text
 {
-    public class OrdinalTests : StringNaturalComparerCommonTests
+    public class OrdinalTests : NaturalStringComparerCommonTests
     {
         public OrdinalTests() : base(
-            StringNaturalComparer.Ordinal,
+            NaturalStringComparer.Ordinal,
             StringComparer.Ordinal)
         {
         }

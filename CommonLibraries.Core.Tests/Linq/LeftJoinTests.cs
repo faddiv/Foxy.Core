@@ -8,7 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Xunit;
 
-namespace CommonLibraries.Core.Linq
+namespace Foxy.Core.Linq
 {
     public class LeftJoinTests : IDisposable
     {
@@ -99,20 +99,14 @@ namespace CommonLibraries.Core.Linq
         [Fact]
         public void Queriable_LeftJoin_works_on_db_as_left_join()
         {
-            using (var db = CreateDb())
-            {
+            using var db = CreateDb();
+            var orderDetailsSubset = db.OrderDetails.Where(e => e.OrderId % 2 == 0);
+            var result = db.Orders
+                .LeftJoin(orderDetailsSubset, l => l.OrderId, l => l.OrderId, (o, i) => new { o, i })
+                .ToList();
 
-                var OrderDetail = db.OrderDetails.Take(10).ToList();
-                db.RemoveRange(OrderDetail);
-                db.SaveChanges();
-
-                var result = db.Orders
-                    .LeftJoin(db.OrderDetails, l => l.OrderId, l => l.OrderId, (o, i) => new { o, i })
-                    .ToList();
-
-                result.Should().Contain(e => e.o != null && e.i != null && e.o.OrderId == e.i.OrderId);
-                result.Should().Contain(e => e.o != null && e.i == null);
-            }
+            result.Should().Contain(e => e.o != null && e.i != null && e.o.OrderId == e.i.OrderId);
+            result.Should().Contain(e => e.o != null && e.i == null);
         }
 
         [Fact]

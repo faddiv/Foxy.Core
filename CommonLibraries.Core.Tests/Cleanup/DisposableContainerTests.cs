@@ -3,7 +3,7 @@ using Moq;
 using System;
 using Xunit;
 
-namespace CommonLibraries.Core.Cleanup
+namespace Foxy.Core.Cleanup
 {
     public class DisposableContainerTests
     {

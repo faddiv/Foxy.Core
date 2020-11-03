@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace CommonLibraries.Core.Text
+namespace Foxy.Core.Text
 {
     internal class VectorKey : IEquatable<VectorKey>
     {

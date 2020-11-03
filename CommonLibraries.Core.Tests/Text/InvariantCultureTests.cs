@@ -1,13 +1,13 @@
-﻿using CommonLibraries.Core.Text.TestHelpers;
+using Foxy.Core.Text.TestHelpers;
 using System;
 using Xunit;
 
-namespace CommonLibraries.Core.Text
+namespace Foxy.Core.Text
 {
-    public class InvariantCultureTests : StringNaturalComparerCommonTests
+    public class InvariantCultureTests : NaturalStringComparerCommonTests
     {
         public InvariantCultureTests()
-            : base(StringNaturalComparer.InvariantCulture,
+            : base(NaturalStringComparer.InvariantCulture,
                   StringComparer.InvariantCulture)
         {
         }

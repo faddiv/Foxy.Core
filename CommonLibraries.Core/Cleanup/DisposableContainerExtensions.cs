@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CommonLibraries.Core.Cleanup
+namespace Foxy.Core.Cleanup
 {
     /// <summary>
     /// Connects other classes from this namespace to the DisposableContainer.

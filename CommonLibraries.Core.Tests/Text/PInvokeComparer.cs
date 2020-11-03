@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace CommonLibraries.Core.Text
+namespace Foxy.Core.Text
 {
     public class PInvokeComparer : IComparer<string>
     {

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace CommonLibraries.Core.Collections
+namespace Foxy.Core.Collections
 {
     /// <summary>
     /// Represents a key comparison operation that uses the keySelector to extract

@@ -1,29 +1,29 @@
-﻿using BenchmarkDotNet.Attributes;
-using CommonLibraries.Core.Text;
+using BenchmarkDotNet.Attributes;
+using Foxy.Core.Text;
 using System.Collections.Generic;
 
-namespace StringNaturalComparerNS
+namespace NaturalStringComparerNS
 {
     [ArtifactsPath(".\\CompareToBuildinComparerBenchmarks")]
     public class CompareToBuildinComparerBenchmarks : BenchmarksBase
     {
-        private readonly IComparer<string> stringNaturalComparerOrdinal = 
-            StringNaturalComparer.Ordinal;
+        private readonly IComparer<string> NaturalStringComparerOrdinal =
+            NaturalStringComparer.Ordinal;
         private readonly IComparer<string> stringComparer = 
             System.StringComparer.Ordinal;
 
-        private readonly IComparer<string> stringNaturalComparerOrdinalIgnoreCase =
-            StringNaturalComparer.OrdinalIgnoreCase;
+        private readonly IComparer<string> NaturalStringComparerOrdinalIgnoreCase =
+            NaturalStringComparer.OrdinalIgnoreCase;
         private readonly IComparer<string> stringComparerOrdinalIgnoreCase =
             System.StringComparer.OrdinalIgnoreCase;
 
-        private readonly IComparer<string> stringNaturalComparerInvariant =
-            StringNaturalComparer.InvariantCulture;
+        private readonly IComparer<string> NaturalStringComparerInvariant =
+            NaturalStringComparer.InvariantCulture;
         private readonly IComparer<string> stringComparerInvariant =
             System.StringComparer.InvariantCulture;
 
-        private readonly IComparer<string> stringNaturalComparerInvariantIgnoreCase =
-            StringNaturalComparer.InvariantCultureIgnoreCase;
+        private readonly IComparer<string> NaturalStringComparerInvariantIgnoreCase =
+            NaturalStringComparer.InvariantCultureIgnoreCase;
         private readonly IComparer<string> stringComparerInvariantIgnoreCase =
             System.StringComparer.InvariantCultureIgnoreCase;
 
@@ -58,7 +58,7 @@ namespace StringNaturalComparerNS
         [Benchmark]
         public int NaturalOrdinal()
         {
-            return stringNaturalComparerOrdinal.Compare(left, right);
+            return NaturalStringComparerOrdinal.Compare(left, right);
         }
 
         [Benchmark]
@@ -70,7 +70,7 @@ namespace StringNaturalComparerNS
         [Benchmark]
         public int NaturalOrdinalIgnoreCase()
         {
-            return stringNaturalComparerOrdinalIgnoreCase.Compare(left, right);
+            return NaturalStringComparerOrdinalIgnoreCase.Compare(left, right);
         }
 
         [Benchmark]
@@ -82,7 +82,7 @@ namespace StringNaturalComparerNS
         [Benchmark]
         public int NaturalInvariant()
         {
-            return stringNaturalComparerInvariant.Compare(left, right);
+            return NaturalStringComparerInvariant.Compare(left, right);
         }
 
         [Benchmark]
@@ -94,7 +94,7 @@ namespace StringNaturalComparerNS
         [Benchmark]
         public int NaturalInvariantIgnoreCase()
         {
-            return stringNaturalComparerInvariantIgnoreCase.Compare(left, right);
+            return NaturalStringComparerInvariantIgnoreCase.Compare(left, right);
         }
 
         [Benchmark]

@@ -1,3 +1,3 @@
-﻿using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
 
-[assembly:InternalsVisibleTo("CommonLibraries.Core.Tests")]
+[assembly:InternalsVisibleTo("Foxy.Core.Tests")]

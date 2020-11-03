@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace CommonLibraries.Core.Collections
+namespace Foxy.Core.Collections
 {
     public class KeyComparerTests
     {

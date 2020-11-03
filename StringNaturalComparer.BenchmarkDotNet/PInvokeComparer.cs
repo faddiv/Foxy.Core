@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-namespace StringNaturalComparerNS
+namespace NaturalStringComparerNS
 {
     public class PInvokeComparer : IComparer<string>
     {

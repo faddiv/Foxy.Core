@@ -1,16 +1,16 @@
-﻿using BenchmarkDotNet.Attributes;
-using CommonLibraries.Core.Text;
+using BenchmarkDotNet.Attributes;
+using Foxy.Core.Text;
 using System.Collections.Generic;
 
-namespace StringNaturalComparerNS
+namespace NaturalStringComparerNS
 {
-    [ArtifactsPath(".\\StringNaturalComparerModes")]
-    public class StringNaturalComparerModes : BenchmarksBase
+    [ArtifactsPath(".\\NaturalStringComparerModes")]
+    public class NaturalStringComparerModes : BenchmarksBase
     {
-        private readonly IComparer<string> currentCulture = StringNaturalComparer.CurrentCulture;
-        private readonly IComparer<string> currentCultureIgnoreCase = StringNaturalComparer.CurrentCultureIgnoreCase;
-        private readonly IComparer<string> ordinal = StringNaturalComparer.Ordinal;
-        private readonly IComparer<string> ordinalIgnoreCase = StringNaturalComparer.OrdinalIgnoreCase;
+        private readonly IComparer<string> currentCulture = NaturalStringComparer.CurrentCulture;
+        private readonly IComparer<string> currentCultureIgnoreCase = NaturalStringComparer.CurrentCultureIgnoreCase;
+        private readonly IComparer<string> ordinal = NaturalStringComparer.Ordinal;
+        private readonly IComparer<string> ordinalIgnoreCase = NaturalStringComparer.OrdinalIgnoreCase;
         private readonly string[][] dataSets = new[] {
             new[] {
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. 2 a",

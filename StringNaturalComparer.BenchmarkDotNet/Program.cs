@@ -3,7 +3,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 
-namespace StringNaturalComparerNS
+namespace NaturalStringComparerNS
 {
     public static class Program
     {
@@ -14,7 +14,8 @@ namespace StringNaturalComparerNS
             {
                 var assembly = typeof(Program).Assembly;
                 benchmark = assembly.GetType(args[0]);
-            } else
+            }
+            else
             {
                 benchmark = typeof(StringComparerBenchmarks);
             }

@@ -1,14 +1,14 @@
-using CommonLibraries.Core.Text.TestHelpers;
+using Foxy.Core.Text.TestHelpers;
 using FluentAssertions;
 using System;
 using Xunit;
 
-namespace CommonLibraries.Core.Text
+namespace Foxy.Core.Text
 {
-    public class InvariantCultureIgnoreCaseTests : StringNaturalComparerCommonTests
+    public class InvariantCultureIgnoreCaseTests : NaturalStringComparerCommonTests
     {
         public InvariantCultureIgnoreCaseTests()
-            : base(StringNaturalComparer.InvariantCultureIgnoreCase,
+            : base(NaturalStringComparer.InvariantCultureIgnoreCase,
                   StringComparer.InvariantCultureIgnoreCase)
         {
         }
@@ -68,14 +68,14 @@ namespace CommonLibraries.Core.Text
             var naturalSortExtensionComparer =
                 NaturalSort.Extension.NaturalSortExtension
                 .WithNaturalSort(StringComparer.InvariantCultureIgnoreCase);
-            var stringNaturalComparer = StringNaturalComparer.InvariantCultureIgnoreCase;
+            var naturalStringComparer = NaturalStringComparer.InvariantCultureIgnoreCase;
             var pinvokeComparer = new PInvokeComparer();
             var text1 = "LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT. 2 A";
             var text2 = "lorem ipsum dolor sit amet, consectetur adipiscing elit. 2 a";
 
             var scResult = stringComparer.Compare(text1, text2);
             var nsecResult = naturalSortExtensionComparer.Compare(text1, text2);
-            var sncResult = stringNaturalComparer.Compare(text1, text2);
+            var sncResult = naturalStringComparer.Compare(text1, text2);
             var picResult = pinvokeComparer.Compare(text1, text2);
 
             nsecResult.Should().Be(scResult);

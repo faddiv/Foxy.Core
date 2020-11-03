@@ -1,6 +1,6 @@
-﻿using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Attributes;
 
-namespace StringNaturalComparerNS
+namespace NaturalStringComparerNS
 {
     [ArtifactsPath(".\\EtcBenchmarks")]
     public class EtcBenchmarks : BenchmarksBase
@@ -31,7 +31,7 @@ namespace StringNaturalComparerNS
         [Benchmark]
         public bool RangeMinus()
         {
-            return (uint)(ch - '0') <= (uint)('9' - '0');
+            return (uint)(ch - '0') <= '9' - '0';
         }
 
         [Benchmark]

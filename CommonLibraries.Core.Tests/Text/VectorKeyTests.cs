@@ -1,8 +1,8 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using System;
 using Xunit;
 
-namespace CommonLibraries.Core.Text
+namespace Foxy.Core.Text
 {
     public class VectorKeyTests
     {

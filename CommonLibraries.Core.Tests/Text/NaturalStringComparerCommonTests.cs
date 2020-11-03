@@ -1,21 +1,21 @@
-﻿using CommonLibraries.Core.Text.TestHelpers;
+using Foxy.Core.Text.TestHelpers;
 using FluentAssertions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace CommonLibraries.Core.Text
+namespace Foxy.Core.Text
 {
-    public abstract class StringNaturalComparerCommonTests
+    public abstract class NaturalStringComparerCommonTests
     {
-        protected StringNaturalComparer Comparer { get; }
+        protected NaturalStringComparer Comparer { get; }
 
         protected StringComparer OrigComparer { get; }
 
         protected static string[] allCh { get; }
 
-        static StringNaturalComparerCommonTests()
+        static NaturalStringComparerCommonTests()
         {
 
             allCh = new string[1 + char.MaxValue - char.MinValue];
@@ -26,8 +26,8 @@ namespace CommonLibraries.Core.Text
             }
         }
 
-        protected StringNaturalComparerCommonTests(
-            StringNaturalComparer comparer,
+        protected NaturalStringComparerCommonTests(
+            NaturalStringComparer comparer,
             StringComparer origComparer)
         {
             Comparer = comparer;
