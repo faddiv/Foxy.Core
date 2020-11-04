@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CommonLibraries.Core\Foxy.Core.csproj" />
+    <ProjectReference Include="..\Foxy.Core\Foxy.Core.csproj" />
   </ItemGroup>
 
 </Project>
