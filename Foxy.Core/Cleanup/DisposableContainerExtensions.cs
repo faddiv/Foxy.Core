@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Foxy.Core.Cleanup
 {
@@ -7,7 +7,8 @@ namespace Foxy.Core.Cleanup
     /// </summary>
     public static partial class DisposableContainerExtensions
     {
-        public static void AddCleanupAction(this DisposableContainer container, Action cleanupAction)
+        public static void AddCleanupAction(this DisposableContainer container,
+            Action cleanupAction)
         {
             container.AddManagedResource(new CleanupAction(cleanupAction));
         }
@@ -23,7 +24,7 @@ namespace Foxy.Core.Cleanup
         public static void AddEventSubscription(this DisposableContainer container,
             object instance,
             string eventName,
-            Delegate handler)
+            Action handler)
         {
             container.AddManagedResource(new EventSubscription(instance, eventName, handler));
         }
@@ -32,31 +33,16 @@ namespace Foxy.Core.Cleanup
         /// Subscribe the handler for the given event and adds the unsubscription 
         /// to the DisposableContanier so it is called on Dispose.
         /// </summary>
-        /// <typeparam name="TSource">The type which contains the static event.</typeparam>
         /// <param name="container">The container where the event unsubscription is added.</param>
+        /// <param name="type">The type which contains the static event.</param>
         /// <param name="eventName">The name of the event. It is case sensitive.</param>
         /// <param name="handler">The handler which are subscripted to the event.</param>
-        public static void AddEventSubscription<TSource>(this DisposableContainer container,
+        public static void AddEventSubscription(this DisposableContainer container,
+            Type type,
             string eventName,
-            Delegate handler)
+            Action handler)
         {
-            container.AddEventSubscription(typeof(TSource), eventName, handler);
-        }
-
-
-        /// <summary>
-        /// Subscribe the handler for the given event and adds the unsubscription 
-        /// to the DisposableContanier so it is called on Dispose.
-        /// </summary>
-        /// <param name="eventSourceType">The type which contains the static event.</param>
-        /// <param name="container">The container where the event unsubscription is added.</param>
-        /// <param name="eventName">The name of the event. It is case sensitive.</param>
-        /// <param name="handler">The handler which are subscripted to the event.</param>
-        public static void AddEventSubscription(this DisposableContainer container, Type eventSourceType,
-            string eventName,
-            Delegate handler)
-        {
-            container.AddManagedResource(new EventSubscription(eventSourceType, eventName, handler));
+            container.AddManagedResource(new EventSubscription(type, eventName, handler));
         }
     }
 }

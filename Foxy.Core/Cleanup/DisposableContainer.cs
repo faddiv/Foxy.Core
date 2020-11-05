@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
@@ -31,9 +31,11 @@ namespace Foxy.Core.Cleanup
         /// Adds an IDisposable instance to the container which is disposed in the <see cref="Dispose"/>.
         /// </summary>
         /// <param name="disposabe"></param>
-        public void AddManagedResource(IDisposable disposabe)
+        public TDisposable AddManagedResource<TDisposable>(TDisposable disposabe)
+            where TDisposable: IDisposable
         {
             _managedResources.Add(disposabe);
+            return disposabe;
         }
 
         #region IDisposable Support

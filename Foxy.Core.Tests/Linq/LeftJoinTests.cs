@@ -10,18 +10,21 @@ using Xunit;
 
 namespace Foxy.Core.Linq
 {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Design",
+        "CA1063:Implement IDisposable Correctly",
+        Justification = "Test framework calls it correctly.")]
     public class LeftJoinTests : IDisposable
     {
 
-        private NorthwindContext db;
+        private readonly NorthwindContext _db;
         public LeftJoinTests()
         {
-            db = CreateDb();
+            _db = CreateDb();
         }
 
         public void Dispose()
         {
-            db.Dispose();
+            _db.Dispose();
         }
 
         [Fact]
@@ -184,13 +187,13 @@ namespace Foxy.Core.Linq
 
         private List<Order> GetOrders()
         {
-            return db.Orders
+            return _db.Orders
                 .ToList();
         }
 
         private List<OrderDetail> GetOrderDetails()
         {
-            return db.OrderDetails
+            return _db.OrderDetails
                 .ToList();
         }
 

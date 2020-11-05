@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Foxy.Core.Tests", "Foxy.Cor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NaturalStringComparer.BenchmarkDotNet", "StringNaturalComparer.BenchmarkDotNet\NaturalStringComparer.BenchmarkDotNet.csproj", "{AA9FC72F-17FC-4808-9BBA-B5EE56F1A0DE}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Examples", "Examples\Examples.csproj", "{B0E8474E-9BC0-469D-8554-0254F781AAE7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{AA9FC72F-17FC-4808-9BBA-B5EE56F1A0DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA9FC72F-17FC-4808-9BBA-B5EE56F1A0DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA9FC72F-17FC-4808-9BBA-B5EE56F1A0DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0E8474E-9BC0-469D-8554-0254F781AAE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0E8474E-9BC0-469D-8554-0254F781AAE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0E8474E-9BC0-469D-8554-0254F781AAE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0E8474E-9BC0-469D-8554-0254F781AAE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

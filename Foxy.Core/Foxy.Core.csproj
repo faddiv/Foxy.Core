@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net48</TargetFrameworks>
@@ -22,14 +22,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="Cleanup\AddEventSubscription.cs">
+    <Compile Update="Cleanup\AddEventSubscriptionStatic.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>AddEventSubscription.tt</DependentUpon>
+      <DependentUpon>AddEventSubscriptionStatic.tt</DependentUpon>
     </Compile>
-    <None Update="Cleanup\AddEventSubscription.tt">
+    <None Update="Cleanup\AddEventSubscriptionStatic.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AddEventSubscription.cs</LastGenOutput>
+      <LastGenOutput>AddEventSubscriptionStatic.cs</LastGenOutput>
+    </None>
+    <Compile Update="Cleanup\AddEventSubscriptionInstance.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AddEventSubscriptionInstance.tt</DependentUpon>
+    </Compile>
+    <None Update="Cleanup\AddEventSubscriptionInstance.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AddEventSubscriptionInstance.cs</LastGenOutput>
     </None>
   </ItemGroup>
 
