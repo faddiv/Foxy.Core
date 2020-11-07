@@ -35,4 +35,8 @@
     <ProjectReference Include="..\Foxy.Core\Foxy.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
 </Project>

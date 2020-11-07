@@ -7,7 +7,7 @@ namespace NaturalStringComparerNS
     public class BigNumberBenchmarks : BenchmarksBase
     {
         private readonly IComparer<string> naturalStringComparer = Foxy.Core.Text.NaturalStringComparer.Ordinal;
-        private readonly IComparer<string> naturalSortExtension = NaturalSort.Extension.NaturalSortExtension.WithNaturalSort(System.StringComparer.CurrentCulture);
+        private readonly IComparer<string> naturalSortExtension = NaturalSort.Extension.NaturalSortExtension.WithNaturalSort(System.StringComparison.CurrentCulture);
         private readonly IComparer<string> pInvokeComparer = new PInvokeComparer();
 
         private string[][] dataSets = new[] {

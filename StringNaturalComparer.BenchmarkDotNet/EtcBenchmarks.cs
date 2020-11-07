@@ -28,6 +28,10 @@ namespace NaturalStringComparerNS
             }
         }
 
+        /// <summary>
+        /// In the .net code this method is used to determine if a character is digit
+        /// but the other one is faster.
+        /// </summary>
         [Benchmark]
         public bool RangeMinus()
         {

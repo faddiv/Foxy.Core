@@ -1,17 +1,17 @@
-using BenchmarkDotNet.Attributes;
+﻿using BenchmarkDotNet.Attributes;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
 namespace NaturalStringComparerNS
 {
-    [ArtifactsPath(".\\SortTextsBenchmarks")]
-    public class SortTextsBenchmarks : BenchmarksBase
+    [ArtifactsPath(".\\SortTextsOrdinalBenchmarks")]
+    public class SortTextsOrdinalBenchmarks : BenchmarksBase
     {
-        private readonly IComparer<string> naturalStringComparer = Foxy.Core.Text.NaturalStringComparer.InvariantCultureIgnoreCase;
-        private readonly IComparer<string> naturalSortExtension = NaturalSort.Extension.NaturalSortExtension.WithNaturalSort(System.StringComparison.InvariantCultureIgnoreCase);
+        private readonly IComparer<string> naturalStringComparer = Foxy.Core.Text.NaturalStringComparer.Ordinal;
+        private readonly IComparer<string> naturalSortExtension = NaturalSort.Extension.NaturalSortExtension.WithNaturalSort(System.StringComparison.Ordinal);
         private readonly IComparer<string> pInvokeComparer = new PInvokeComparer();
-        private readonly IComparer<string> stringComparer = System.StringComparer.InvariantCultureIgnoreCase;
+        private readonly IComparer<string> stringComparer = System.StringComparer.Ordinal;
 
         private string[] stringsToSort;
 

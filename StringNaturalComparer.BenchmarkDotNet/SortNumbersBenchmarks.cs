@@ -10,7 +10,7 @@ namespace NaturalStringComparerNS
     public class SortNumbersBenchmarks : BenchmarksBase
     {
         private readonly IComparer<string> naturalStringComparer = Foxy.Core.Text.NaturalStringComparer.InvariantCultureIgnoreCase;
-        private readonly IComparer<string> naturalSortExtension = NaturalSort.Extension.NaturalSortExtension.WithNaturalSort(System.StringComparer.InvariantCultureIgnoreCase);
+        private readonly IComparer<string> naturalSortExtension = NaturalSort.Extension.NaturalSortExtension.WithNaturalSort(System.StringComparison.InvariantCultureIgnoreCase);
         private readonly IComparer<string> pInvokeComparer = new PInvokeComparer();
         private readonly IComparer<string> stringComparer = System.StringComparer.InvariantCultureIgnoreCase;
 

@@ -8,7 +8,7 @@ namespace Foxy.Core.Linq
     public static class LinqExtensions
     {
         /// <summary>
-        /// It returns all element from the outer enumerable and default (null) 
+        /// It returns all element from the outer enumerable and default (null)
         /// from inner enumerable if no matching key found.
         /// The default equality comparer is used to compare keys.
         /// </summary>
@@ -21,7 +21,7 @@ namespace Foxy.Core.Linq
         /// <param name="outerKeySelector">A function to extract the left join key from each element of the first sequence.</param>
         /// <param name="innerKeySelector">A function to extract the left join key from each element of the second sequence.</param>
         /// <param name="resultSelector">A function to create a result element from two matching elements. The second element can be null or default.</param>
-        /// <returns>An <see cref="IEnumerable{T}"/> that has elements of type TResult 
+        /// <returns>An <see cref="IEnumerable{T}"/> that has elements of type TResult
         /// that are obtained by performing a left join on two sequences.</returns>
         /// <exception cref="ArgumentNullException">outer or inner or outerKeySelector or innerKeySelector or resultSelector is null.</exception>
         public static IEnumerable<TResult> LeftJoin<TOuter, TInner, TKey, TResult>(
@@ -36,7 +36,7 @@ namespace Foxy.Core.Linq
 
 
         /// <summary>
-        /// It returns all element from the outer enumerable and default (null) 
+        /// It returns all element from the outer enumerable and default (null)
         /// from inner enumerable if no matching key found.
         /// </summary>
         /// <typeparam name="TOuter">The type of the elements of the first sequence.</typeparam>
@@ -49,7 +49,7 @@ namespace Foxy.Core.Linq
         /// <param name="innerKeySelector">A function to extract the left join key from each element of the second sequence.</param>
         /// <param name="resultSelector">A function to create a result element from two matching elements. The second element can be null or default.</param>
         /// <param name="comparer">An <see cref="IEqualityComparer{T}"/> to hash and compare keys.</param>
-        /// <returns>An <see cref="IEnumerable{T}"/> that has elements of type TResult 
+        /// <returns>An <see cref="IEnumerable{T}"/> that has elements of type TResult
         /// that are obtained by performing a left join on two sequences.</returns>
         /// <exception cref="ArgumentNullException">outer or inner or outerKeySelector or innerKeySelector or resultSelector is null.</exception>
         public static IEnumerable<TResult> LeftJoin<TOuter, TInner, TKey, TResult>(
@@ -74,7 +74,7 @@ namespace Foxy.Core.Linq
 
 #if NETSTANDARD2_0 || NET45
         /// <summary>
-        /// It returns all element from the outer enumerable and default (null) 
+        /// It returns all element from the outer enumerable and default (null)
         /// from inner enumerable if no matching key found.
         /// The default equality comparer is used to compare keys.
         /// </summary>
@@ -100,7 +100,7 @@ namespace Foxy.Core.Linq
         }
 
         /// <summary>
-        /// It returns all element from the outer enumerable and default (null) 
+        /// It returns all element from the outer enumerable and default (null)
         /// from inner enumerable if no matching key found.
         /// </summary>
         /// <typeparam name="TOuter">The type of the elements of the first sequence.</typeparam>
@@ -198,7 +198,7 @@ namespace Foxy.Core.Linq
     }
 
 #if NETSTANDARD2_0 || NET45
-    class ReplaceParameterExpressionVisitor : ExpressionVisitor
+    internal class ReplaceParameterExpressionVisitor : ExpressionVisitor
     {
         public ReplaceParameterExpressionVisitor(ParameterExpression oldExpression, Expression newExpression)
         {
