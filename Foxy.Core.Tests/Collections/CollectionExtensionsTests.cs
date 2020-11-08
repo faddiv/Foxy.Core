@@ -199,9 +199,50 @@ namespace Foxy.Core.Collections
         }
 
         [Fact]
+        public void RemoveAll_requires_the_elements()
+        {
+            // Arrange
+            ICollection<int> list = Enumerable.Range(3, 3).ToList();
+            int[] newElements = null;
+            Action action = () => list.RemoveAll(newElements);
+
+            // Act
+            // Assert
+            action.Should().Throw<ArgumentNullException>();
+        }
+
+        [Fact]
+        public void RemoveAll_requires_the_collection()
+        {
+            // Arrange
+            ICollection<int> list = null;
+            int[] newElements = Enumerable.Range(3, 3).ToArray();
+            Action action = () => list.RemoveAll(newElements);
+
+            // Act
+            // Assert
+            action.Should().Throw<ArgumentNullException>();
+        }
+
+        [Fact]
+        public void RemoveAll_removes_the_elements()
+        {
+            // Arrange
+            ICollection<int> list = Enumerable.Range(1, 2).ToList();
+            int[] elements = Enumerable.Range(2, 2).ToArray();
+
+            // Act
+            list.RemoveAll(elements);
+
+            // Assert
+            list.Should().HaveCount(1);
+            list.Should().Contain(1);
+        }
+
+        [Fact]
         public void ToChunks_requires_an_enumeration()
         {
-            IEnumerable<int> enumeration = null; ;
+            IEnumerable<int> enumeration = null;
 
             Calling(() => enumeration.ToChunks(3).ToList())
                 .Should().Throw<ArgumentNullException>()

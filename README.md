@@ -45,6 +45,7 @@ Sometimes I work with ```ICollection``` or it's derivative but I still would lik
 ```csharp
     ICollection<Element> collection = GetSomeCollection();
     IEnumerable<Element> newValues = CreateNewValues();
+
     collection.AddRange(newValues);
 ```
 
@@ -52,7 +53,8 @@ Sometimes I work with ```ICollection``` or it's derivative but I still would lik
 Adds several element to a collection.
 ```csharp
     ICollection<Element> collection = GetSomeCollection();
-    collection.AddElements(element1,element2,element3);
+
+    collection.AddElements(element1, element2);
 ```
 
 ### FindAndRemove
@@ -81,8 +83,8 @@ Sometimes it is necessary to process a very large list but you can process only 
 ### SortByKey
 If you want to sort a ```List<T>``` or an ```Array<T>``` by a key element this extension simplifies it.
 ```csharp
-    List<Element> list = GetData();
-    list.SortByKey(lement => element.Key);
+    List<Element> list = GetUnsortedList();
+    list.SortByKey(element => element.Key);
 ```
 
 ## Linq
@@ -95,7 +97,7 @@ The original left join pattern looks like this:
 ```
 With the extension you can write like the regular join:
 ```csharp
-    var result = outer.LeftJoin(inner, outer => outer.Key, inner.Key, (inner, outer) => new { inner, outer });
+    var result = outer.LeftJoin(inner, outer => outer.Key, inner => inner.Key, (inner, outer) => new { inner, outer });
 ```
 
 ## Text
@@ -106,6 +108,20 @@ This namespace contains a [natural string comparer](https://en.wikipedia.org/wik
  - Have some fun and learn new things while implementiing it. :)
 
 I think I managed to statisfy all three goal so enjoy the result. For this I say a **huge thanks** for the .net development team since the most impacttfull parts of the solution comes from the original StringComparer implementation.
+
+### Example
+```csharp
+    var list = GetFiles();
+    list.Sort(NaturalStringComparer.OrdinalIgnoreCase);
+```
+Result:
+```
+    File 2.txt
+    File 7.txt
+    File 24.txt
+    File 25.txt
+    ...
+```
 
 ### Some note on the implementation
 >  As [best practices tells](https://docs.microsoft.com/en-us/dotnet/standard/base-types/best-practices-strings) you should use Ordinal or OrdinalIgnoreCase whenever possible. In my implementation I use caching for culture specific comparisons which eats lots of memory (128kb per culture).

@@ -113,6 +113,31 @@ namespace Foxy.Core.Collections
         }
 
         /// <summary>
+        /// For all the elements specified by the collection
+        /// removes the first occurence off each from the <see cref="ICollection{TElement}"/>.
+        /// </summary>
+        /// <typeparam name="TElement">The type of elements in the collection.</typeparam>
+        /// <param name="collection"></param>
+        /// <param name="elements">The collection whose elements should be removed from the <see cref="ICollection{TElement}"/>.</param>
+        /// <exception cref="ArgumentNullException">collection or elements is null.</exception>
+        public static void RemoveAll<TElement>(this ICollection<TElement> collection, IEnumerable<TElement> elements)
+        {
+            if (collection is null)
+            {
+                throw new ArgumentNullException(nameof(collection));
+            }
+            if (elements is null)
+            {
+                throw new ArgumentNullException(nameof(elements));
+            }
+
+            foreach (var item in elements)
+            {
+                collection.Remove(item);
+            }
+        }
+
+        /// <summary>
         /// Breaks the enumeration into equal sized lists. The last list may be smaller than chunk size.
         /// </summary>
         /// <typeparam name="T">Type of the list elements.</typeparam>
