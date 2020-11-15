@@ -1,4 +1,6 @@
 # Foxy.Core
+[![Build status](https://ci.appveyor.com/api/projects/status/vs1nwbq9djtmub59?svg=true)](https://ci.appveyor.com/project/faddiv/foxy-core)
+
 Foxy.Core provides extensions and useful helpers functions that base only on .net standard 2.0.
 
 # Content (Namespaces)
