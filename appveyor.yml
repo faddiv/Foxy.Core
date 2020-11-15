@@ -2,6 +2,9 @@ version: '{build}'
 image: Visual Studio 2019
 configuration: Release
 
+before_build:
+- cmd: dotnet restore
+
 build:
   verbosity: minimal
 
