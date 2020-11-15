@@ -1,4 +1,9 @@
 version: '{build}'
+
+branches:
+  only:
+  - main
+
 image: Visual Studio 2019
 configuration: Release
 
