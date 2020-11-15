@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net48</TargetFrameworks>
@@ -12,6 +12,7 @@
     <Copyright>Viktor Faddi</Copyright>
     <RepositoryUrl>https://github.com/faddiv/Foxy.Core</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -39,6 +40,10 @@
     <None Update="Cleanup\AddEventSubscriptionInstance.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>AddEventSubscriptionInstance.cs</LastGenOutput>
+    </None>
+    <None Include="..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
     </None>
   </ItemGroup>
 
