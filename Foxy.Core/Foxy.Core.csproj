@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net48</TargetFrameworks>
@@ -23,28 +23,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="Cleanup\AddEventSubscriptionStatic.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>AddEventSubscriptionStatic.tt</DependentUpon>
-    </Compile>
-    <None Update="Cleanup\AddEventSubscriptionStatic.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AddEventSubscriptionStatic.cs</LastGenOutput>
-    </None>
-    <Compile Update="Cleanup\AddEventSubscriptionInstance.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>AddEventSubscriptionInstance.tt</DependentUpon>
-    </Compile>
-    <None Update="Cleanup\AddEventSubscriptionInstance.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>AddEventSubscriptionInstance.cs</LastGenOutput>
-    </None>
     <None Include="..\icon.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CustomSourceGenerators\CustomSourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 
   <ItemGroup>
