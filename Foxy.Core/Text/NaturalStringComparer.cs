@@ -27,7 +27,6 @@ namespace Foxy.Core.Text
         public new static NaturalStringComparer CurrentCultureIgnoreCase
                     => new NaturalStringComparer(CompareOptions.IgnoreCase, CultureInfo.CurrentCulture);
 
-#if !NETSTANDARD1_3
         /// <summary>
         /// Gets a <see cref="NaturalStringComparer"/> object that performs 
         /// a case-sensitive string natural comparison using the word comparison rules of 
@@ -43,7 +42,7 @@ namespace Foxy.Core.Text
         /// </summary>
         public new static NaturalStringComparer InvariantCultureIgnoreCase
                     => new NaturalStringComparer(CompareOptions.IgnoreCase, CultureInfo.InvariantCulture);
-#endif
+
         /// <summary>
         /// Gets a <see cref="NaturalStringComparer"/> object that performs 
         /// a case-sensitive ordinal string natural comparison.
@@ -83,9 +82,6 @@ namespace Foxy.Core.Text
                 culture);
         }
 
-        internal const int intSize = sizeof(int) / sizeof(char);
-        internal const int longSize = sizeof(long) / sizeof(char);
-
         private readonly CultureInfo _culture;
         private readonly CompareOptions _options;
         private readonly bool _ignoreCase;
@@ -101,11 +97,7 @@ namespace Foxy.Core.Text
                 _mappings = MappingCache.GetMapping(culture, _ignoreCase);
             else
             {
-#if NET45
-                _mappings = new ushort[0];
-#else
                 _mappings = Array.Empty<ushort>();
-#endif
             }
         }
 
@@ -231,9 +223,7 @@ namespace Foxy.Core.Text
             }
         }
 
-#if !NET40
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         private bool IsEqualIgnoreCase(char v1, char v2)
         {
             if (_culture != null)
@@ -256,9 +246,7 @@ namespace Foxy.Core.Text
             }
         }
 
-#if !NET40
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         private int CompareChar(char ch1, char ch2)
         {
             if (_culture != null)
@@ -291,17 +279,13 @@ namespace Foxy.Core.Text
             return char.ToUpperInvariant(ch1);
         }
 
-#if !NET40
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         internal unsafe static bool IsDigit(char* pointer)
         {
             return '0' <= *pointer && *pointer <= '9';
         }
 
-#if !NET40
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         private static unsafe long ToNumber(int strLength, char* fp, ref char* pointer)
         {
             var number = 0L;
@@ -320,9 +304,7 @@ namespace Foxy.Core.Text
             return number;
         }
 
-#if !NET40
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         private static unsafe bool MoveNextDifferenceOrdinal(ref char* a, ref char* b, ref int length)
         {
             if (*a != *b) return true;
@@ -394,11 +376,7 @@ namespace Foxy.Core.Text
 
             if (_culture != null)
             {
-#if NET45
-                return obj.GetHashCode();
-#else
                 return _culture.CompareInfo.GetHashCode(obj, _options);
-#endif
             }
             if (_ignoreCase)
             {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -72,7 +72,6 @@ namespace Foxy.Core.Linq
                 .SelectMany(e => e.o.DefaultIfEmpty(), (t, e) => resultSelector(t.i, e));
         }
 
-#if NETSTANDARD2_0 || NET45
         /// <summary>
         /// It returns all element from the outer enumerable and default (null)
         /// from inner enumerable if no matching key found.
@@ -194,10 +193,8 @@ namespace Foxy.Core.Linq
             var newResult = Expression.Lambda(newResultSelector, param, resultSelector.Parameters[1]);
             return newResult;
         }
-#endif
     }
 
-#if NETSTANDARD2_0 || NET45
     internal class ReplaceParameterExpressionVisitor : ExpressionVisitor
     {
         public ReplaceParameterExpressionVisitor(ParameterExpression oldExpression, Expression newExpression)
@@ -218,5 +215,4 @@ namespace Foxy.Core.Linq
             return base.VisitParameter(node);
         }
     }
-#endif
 }
