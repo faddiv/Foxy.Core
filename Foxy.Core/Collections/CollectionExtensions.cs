@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 namespace Foxy.Core.Collections
 {
+    /// <summary>
+    /// Provides a set of static (Shared in Visual Basic) methods to
+    /// extend <see cref="ICollection{T}"/>.
+    /// </summary>
     public static class CollectionExtensions
     {
         /// <summary>
@@ -192,7 +196,7 @@ namespace Foxy.Core.Collections
         /// </summary>
         /// <typeparam name="TValue">The type of elements in the array.</typeparam>
         /// <typeparam name="TKey">The type of key in the elements.</typeparam>
-        /// <param name="list">A list of values to sort.</param>
+        /// <param name="array">A array of values to sort.</param>
         /// <param name="keySelector">A function to extract a key from an element.</param>
         public static void SortByKey<TValue, TKey>(this TValue[] array, Func<TValue, TKey> keySelector)
         {

@@ -1,7 +1,7 @@
 # Foxy.Core
 [![Build status](https://ci.appveyor.com/api/projects/status/vs1nwbq9djtmub59?svg=true)](https://ci.appveyor.com/project/faddiv/foxy-core)
 
-Foxy.Core provides extensions and useful helpers functions that base only on .net standard 2.0.
+Foxy.Core provides extensions and useful helpers functions that rely only on .net standard 2.0.
 
 # Content (Namespaces)
 ## Cleanup
@@ -109,7 +109,7 @@ This namespace contains a [natural string comparer](https://en.wikipedia.org/wik
  - It has to have the same interface as the original ```StringComparer``` so it can be swapped where needed.
  - Have some fun and learn new things while implementiing it. :)
 
-I think I managed to statisfy all three goal so enjoy the result. For this I say a **huge thanks** for the .net development team since the most impacttfull parts of the solution comes from the original StringComparer implementation.
+I think I managed to statisfy all three goal so enjoy the result.
 
 ### Example
 ```csharp
@@ -191,3 +191,8 @@ AMD Ryzen 5 2600, 1 CPU, 12 logical and 6 physical cores
 |NaturalSortExtension|23.090 ms|0.0263 ms|0.0220 ms|0.44|3|
 |PInvokeComparer|52.110 ms|0.3530 ms|0.2947 ms|1.00|4|
 |StringComparer|4.262 ms|0.0147 ms|0.0122 ms|0.08|1|
+
+# Thanks
+I say a **huge thanks** for the .net development team since the most impactful parts of the natural string comparer solution comes from the original StringComparer implementation. Also thanks for the documentation comments in the .net ecosystem. It helped me out to write my own documentation that hopefully have sense.
+
+I also say thank you for my colleague Horia who designed the foxy icon.

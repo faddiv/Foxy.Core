@@ -6,17 +6,14 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Viktor Faddi</Authors>
     <Company />
-    <Description>This package contains the following apis: Collection related extensions, Disposable related api, string natural comparer.</Description>
-    <PackageTags>LeftJoin</PackageTags>
+    <Description>Foxy.Core provides extensions and useful helpers functions that rely only on .net standard 2.0. Most important: LeftJoin, NaturalStringComparer.</Description>
+    <PackageTags>LeftJoin; Natural string comparer; Natural string sort</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>Viktor Faddi</Copyright>
     <RepositoryUrl>https://github.com/faddiv/Foxy.Core</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageIcon>icon.png</PackageIcon>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DocumentationFile>Foxy.Core.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

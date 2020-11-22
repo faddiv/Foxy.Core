@@ -5,6 +5,10 @@ using System.Linq.Expressions;
 
 namespace Foxy.Core.Linq
 {
+    /// <summary>
+    /// Provides a set of static (Shared in Visual Basic) methods to
+    /// extend <see cref="IEnumerable{T}"/> and <see cref="IQueryable{T}"/>.
+    /// </summary>
     public static class LinqExtensions
     {
         /// <summary>

@@ -1,0 +1,779 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Foxy.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Foxy.Core.Cleanup.CleanupAction">
+            <summary>
+            Wrap a method in a <see cref="T:System.IDisposable"/> class so it is called on Dispose.
+            </summary>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.CleanupAction.#ctor(System.Action)">
+            <summary>
+            Creates an instace from the CleanupAction.
+            </summary>
+            <param name="action">An action which is called at Dispose.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.CleanupAction.Dispose">
+            <summary>
+            Calls the provided action.
+            </summary>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.CleanupAction.Equals(System.Object)">
+            <summary>
+            Two CleanupAction equals if the given action is the same.
+            </summary>
+            <param name="obj">object to compare to.</param>
+            <returns>true if the obj is CleanupAction with the same action.</returns>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.CleanupAction.GetHashCode">
+            <summary>
+            Creates a hashcode based on the provided action.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Foxy.Core.Cleanup.DisposableContainer">
+            <summary>
+            A class that holds multiple <see cref="T:System.IDisposable"/> object that needs to disposed together 
+            in safe manner. If a Dispose throws an exception it doesn't stop the cleanup just raise 
+            a <see cref="E:Foxy.Core.Cleanup.DisposableContainer.DisposeFailed"/> event. This should be used in a class constructor and should 
+            used in the Dispose method.
+            </summary>
+        </member>
+        <member name="E:Foxy.Core.Cleanup.DisposableContainer.DisposeFailed">
+            <summary>
+            Raised at Dispose when the Dispose method of an IDisposable throws an exception.
+            </summary>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainer.#ctor">
+            <summary>
+            Creates an instance from the DisposableContainer.
+            </summary>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainer.AddManagedResource``1(``0)">
+            <summary>
+            Adds an IDisposable instance to the container which is disposed in the <see cref="M:Foxy.Core.Cleanup.DisposableContainer.Dispose"/>.
+            </summary>
+            <param name="disposabe"></param>
+        </member>
+        <member name="P:Foxy.Core.Cleanup.DisposableContainer.Disposed">
+            <summary>
+            True if the Dispose already called.
+            </summary>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainer.Dispose(System.Boolean)">
+            <summary>
+            Releases the managed resources added to this container optionally.
+            </summary>
+            <param name="disposing">true to release managed resources.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainer.Finalize">
+            <summary>
+            Does nothign
+            </summary>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainer.Dispose">
+            <summary>
+            Disposes the added items then calls the <see cref="M:System.GC.SuppressFinalize(System.Object)"/> on each. 
+            If one throws an exception then it doesn't stop just raises a <see cref="E:Foxy.Core.Cleanup.DisposableContainer.DisposeFailed"/> 
+            event.
+            </summary>
+        </member>
+        <member name="T:Foxy.Core.Cleanup.DisposableContainerExtensions">
+            <summary>
+            Connects other classes from this namespace to the DisposableContainer.
+            </summary>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddCleanupAction(Foxy.Core.Cleanup.DisposableContainer,System.Action)">
+            <summary>
+            Adds an action that is executed on Dispose.
+            </summary>
+            <param name="container">The container to add the action.</param>
+            <param name="cleanupAction">the action to add.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription(Foxy.Core.Cleanup.DisposableContainer,System.Object,System.String,System.Action)">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="instance">The instance which contains the event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription(Foxy.Core.Cleanup.DisposableContainer,System.Type,System.String,System.Action)">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="type">The type which contains the static event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``1(Foxy.Core.Cleanup.DisposableContainer,System.Object,System.String,System.Action{``0})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="instance">The instance which contains the event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``2(Foxy.Core.Cleanup.DisposableContainer,System.Object,System.String,System.Action{``0,``1})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="instance">The instance which contains the event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``3(Foxy.Core.Cleanup.DisposableContainer,System.Object,System.String,System.Action{``0,``1,``2})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="instance">The instance which contains the event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``4(Foxy.Core.Cleanup.DisposableContainer,System.Object,System.String,System.Action{``0,``1,``2,``3})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="instance">The instance which contains the event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``5(Foxy.Core.Cleanup.DisposableContainer,System.Object,System.String,System.Action{``0,``1,``2,``3,``4})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="instance">The instance which contains the event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``6(Foxy.Core.Cleanup.DisposableContainer,System.Object,System.String,System.Action{``0,``1,``2,``3,``4,``5})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="instance">The instance which contains the event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``7(Foxy.Core.Cleanup.DisposableContainer,System.Object,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="instance">The instance which contains the event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``8(Foxy.Core.Cleanup.DisposableContainer,System.Object,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="instance">The instance which contains the event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``9(Foxy.Core.Cleanup.DisposableContainer,System.Object,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="instance">The instance which contains the event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``10(Foxy.Core.Cleanup.DisposableContainer,System.Object,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="instance">The instance which contains the event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``11(Foxy.Core.Cleanup.DisposableContainer,System.Object,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="instance">The instance which contains the event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``12(Foxy.Core.Cleanup.DisposableContainer,System.Object,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="instance">The instance which contains the event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``13(Foxy.Core.Cleanup.DisposableContainer,System.Object,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="instance">The instance which contains the event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``14(Foxy.Core.Cleanup.DisposableContainer,System.Object,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="instance">The instance which contains the event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``15(Foxy.Core.Cleanup.DisposableContainer,System.Object,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="instance">The instance which contains the event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``16(Foxy.Core.Cleanup.DisposableContainer,System.Object,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="instance">The instance which contains the event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``1(Foxy.Core.Cleanup.DisposableContainer,System.Type,System.String,System.Action{``0})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="type">The type which contains the static event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``2(Foxy.Core.Cleanup.DisposableContainer,System.Type,System.String,System.Action{``0,``1})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="type">The type which contains the static event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``3(Foxy.Core.Cleanup.DisposableContainer,System.Type,System.String,System.Action{``0,``1,``2})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="type">The type which contains the static event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``4(Foxy.Core.Cleanup.DisposableContainer,System.Type,System.String,System.Action{``0,``1,``2,``3})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="type">The type which contains the static event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``5(Foxy.Core.Cleanup.DisposableContainer,System.Type,System.String,System.Action{``0,``1,``2,``3,``4})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="type">The type which contains the static event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``6(Foxy.Core.Cleanup.DisposableContainer,System.Type,System.String,System.Action{``0,``1,``2,``3,``4,``5})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="type">The type which contains the static event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``7(Foxy.Core.Cleanup.DisposableContainer,System.Type,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="type">The type which contains the static event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``8(Foxy.Core.Cleanup.DisposableContainer,System.Type,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="type">The type which contains the static event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``9(Foxy.Core.Cleanup.DisposableContainer,System.Type,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="type">The type which contains the static event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``10(Foxy.Core.Cleanup.DisposableContainer,System.Type,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="type">The type which contains the static event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``11(Foxy.Core.Cleanup.DisposableContainer,System.Type,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="type">The type which contains the static event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``12(Foxy.Core.Cleanup.DisposableContainer,System.Type,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="type">The type which contains the static event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``13(Foxy.Core.Cleanup.DisposableContainer,System.Type,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="type">The type which contains the static event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``14(Foxy.Core.Cleanup.DisposableContainer,System.Type,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="type">The type which contains the static event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``15(Foxy.Core.Cleanup.DisposableContainer,System.Type,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="type">The type which contains the static event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.DisposableContainerExtensions.AddEventSubscription``16(Foxy.Core.Cleanup.DisposableContainer,System.Type,System.String,System.Action{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,``10,``11,``12,``13,``14,``15})">
+            <summary>
+            Subscribe the handler for the given event and adds the unsubscription 
+            to the DisposableContanier so it is called on Dispose.
+            </summary>
+            <param name="container">The container where the event unsubscription is added.</param>
+            <param name="type">The type which contains the static event.</param>
+            <param name="eventName">The name of the event. It is case sensitive.</param>
+            <param name="handler">The handler which are subscripted to the event.</param>
+        </member>
+        <member name="T:Foxy.Core.Cleanup.EventSubscription">
+            <summary>
+            Subscribe the provided handler to the provided event and on calling Dispose it unsubscribe it.
+            </summary>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.EventSubscription.#ctor(System.Type,System.String,System.Delegate)">
+            <summary>
+            Creates an EventSubscription for a static event.
+            </summary>
+            <param name="componentType"></param>
+            <param name="eventName"></param>
+            <param name="handler"></param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.EventSubscription.#ctor(System.Object,System.String,System.Delegate)">
+            <summary>
+            Creates an EventSubscription for an instance level event.
+            </summary>
+            <param name="instance"></param>
+            <param name="eventName"></param>
+            <param name="handler"></param>
+        </member>
+        <member name="M:Foxy.Core.Cleanup.EventSubscription.Dispose">
+            <summary>
+            Unsubscribe the eventhandler from the event.
+            </summary>
+        </member>
+        <member name="T:Foxy.Core.Collections.CollectionExtensions">
+            <summary>
+            Provides a set of static (Shared in Visual Basic) methods to
+            extend <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+        </member>
+        <member name="M:Foxy.Core.Collections.CollectionExtensions.AddRange``2(``0,System.Collections.Generic.IEnumerable{``1})">
+            <summary>
+                Adds the elements of the specified collection to the end of the <see cref="T:System.Collections.Generic.ICollection`1"/>. 
+                The collection has to support <see cref="M:System.Collections.Generic.ICollection`1.Add(`0)">Add(TElement)</see>.
+            </summary>
+            <typeparam name="TCollection">The type of the list.</typeparam>
+            <typeparam name="TElement">The type of elements in the list.</typeparam>
+            <param name="collection">
+                The collection where the elements should be added. It has to support <see cref="M:System.Collections.Generic.ICollection`1.Add(`0)"/>.
+            </param>
+            <param name="elements">
+                The collection whose elements should be added to the end of the <see cref="T:System.Collections.Generic.ICollection`1"/>. 
+                The collection itself cannot be null, but it can contain elements that are null, if type TElement
+                is a reference type.
+            </param>
+            <returns>
+                The collection parameter. So it can be chained.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+                Collection or elements is null.
+            </exception>
+        </member>
+        <member name="M:Foxy.Core.Collections.CollectionExtensions.AddElements``2(``0,``1[])">
+            <summary>
+                Adds the elements of the specified collection to the end of the <see cref="T:System.Collections.Generic.ICollection`1"/>. 
+                The collection has to support <see cref="M:System.Collections.Generic.ICollection`1.Add(`0)">Add(T)</see>.
+            </summary>
+            <typeparam name="TCollection">The type of the list.</typeparam>
+            <typeparam name="TElement">The type of elements in the list.</typeparam>
+            <param name="collection">
+                The collection where the elements should be added. It has to support <see cref="M:System.Collections.Generic.ICollection`1.Add(`0)"/>.
+            </param>
+            <param name="elements">
+                The invidual elements that should be added to the end of the <see cref="T:System.Collections.Generic.ICollection`1"/>. 
+                The collection itself cannot be null, but it can contain elements that are null, if 
+                type TElement is a reference type.
+            </param>
+            <returns>
+                The collection parameter. So it can be chained.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+                Collection or elements is null.
+            </exception>
+        </member>
+        <member name="M:Foxy.Core.Collections.CollectionExtensions.FindAndRemove``1(System.Collections.Generic.ICollection{``0},System.Predicate{``0})">
+            <summary>
+                Searches for the first occurrence of an element that matches the conditions defined by 
+                the specified predicate. If found it is removed from the <see cref="T:System.Collections.Generic.ICollection`1"/> and returned.
+            </summary>
+            <typeparam name="TElement">The type of elements in the collection.</typeparam>
+            <param name="collection">The collection which searched.</param>
+            <param name="match">
+                The <see cref="T:System.Predicate`1"/> delegate that defines the conditions of the element to search for.</param>
+            <returns>
+                The element that matches the condition or default if not found.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">
+                The collection or the match is null.
+            </exception>
+        </member>
+        <member name="M:Foxy.Core.Collections.CollectionExtensions.RemoveAll``1(System.Collections.Generic.ICollection{``0},System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            For all the elements specified by the collection
+            removes the first occurence off each from the <see cref="T:System.Collections.Generic.ICollection`1"/>.
+            </summary>
+            <typeparam name="TElement">The type of elements in the collection.</typeparam>
+            <param name="collection"></param>
+            <param name="elements">The collection whose elements should be removed from the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
+            <exception cref="T:System.ArgumentNullException">collection or elements is null.</exception>
+        </member>
+        <member name="M:Foxy.Core.Collections.CollectionExtensions.ToChunks``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
+            <summary>
+            Breaks the enumeration into equal sized lists. The last list may be smaller than chunk size.
+            </summary>
+            <typeparam name="T">Type of the list elements.</typeparam>
+            <param name="enumerable">Enumerable that are broken into chunks.</param>
+            <param name="chunkSize">Desired size of the chunks</param>
+            <returns>
+            An enumeration which each element contains a list. 
+            Each list contains the next x element where x is chunk size and the last element may be smaller.
+            </returns>
+        </member>
+        <member name="M:Foxy.Core.Collections.CollectionExtensions.SortByKey``2(System.Collections.Generic.List{``0},System.Func{``0,``1})">
+            <summary>
+            Sorts the elements in the entire <see cref="T:System.Collections.Generic.List`1"/> using the default comparer
+            on the key selected by the <paramref name="keySelector"/>.
+            </summary>
+            <typeparam name="TValue">The type of elements in the list.</typeparam>
+            <typeparam name="TKey">The type of key in the elements.</typeparam>
+            <param name="list">A list of values to sort.</param>
+            <param name="keySelector">A function to extract a key from an element.</param>
+        </member>
+        <member name="M:Foxy.Core.Collections.CollectionExtensions.SortByKey``2(``0[],System.Func{``0,``1})">
+            <summary>
+            Sorts the elements in the entire <see cref="T:System.Array"/> using the default comparer
+            on the key selected by the <paramref name="keySelector"/>.
+            </summary>
+            <typeparam name="TValue">The type of elements in the array.</typeparam>
+            <typeparam name="TKey">The type of key in the elements.</typeparam>
+            <param name="array">A array of values to sort.</param>
+            <param name="keySelector">A function to extract a key from an element.</param>
+        </member>
+        <member name="T:Foxy.Core.Collections.KeyComparer`2">
+            <summary>
+            Represents a key comparison operation that uses the keySelector to extract
+            the key from the <typeparamref name="TValue"/> and uses it to compare the inputs.
+            </summary>
+            <typeparam name="TValue">Represents the type of value that compared by a key.</typeparam>
+            <typeparam name="TKey">Represents the type of key that extracted from the value.</typeparam>
+        </member>
+        <member name="M:Foxy.Core.Collections.KeyComparer`2.#ctor(System.Func{`0,`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Foxy.Core.Collections.KeyComparer`2"/> class.
+            </summary>
+            <param name="keySelector">A function that extracts the key from the value.</param>
+            <exception cref="T:System.ArgumentNullException">The keySelector is null.</exception>
+        </member>
+        <member name="M:Foxy.Core.Collections.KeyComparer`2.Compare(`0,`0)">
+            <summary>
+            Compares two objects by key and returns a value indicating whether one is less than, equal to, or greater than the other.
+            </summary>
+            <param name="x">The first object to compare.</param>
+            <param name="y">The second object to compare.</param>
+            <returns>
+            A signed integer that indicates the relative values of x and y.
+            <para>If Less than zero then x is less than y.</para>
+            <para>If Zero	then x equals y.</para>
+            <para>If Greater than zero then x is greater than y.</para>
+            </returns>
+        </member>
+        <member name="T:Foxy.Core.Linq.LinqExtensions">
+            <summary>
+            Provides a set of static (Shared in Visual Basic) methods to
+            extend <see cref="T:System.Collections.Generic.IEnumerable`1"/> and <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+        </member>
+        <member name="M:Foxy.Core.Linq.LinqExtensions.LeftJoin``4(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1},System.Func{``0,``2},System.Func{``1,``2},System.Func{``0,``1,``3})">
+            <summary>
+            It returns all element from the outer enumerable and default (null)
+            from inner enumerable if no matching key found.
+            The default equality comparer is used to compare keys.
+            </summary>
+            <typeparam name="TOuter">The type of the elements of the first sequence.</typeparam>
+            <typeparam name="TInner">The type of the elements of the second sequence.</typeparam>
+            <typeparam name="TKey">The type of the keys returned by the key selector functions.</typeparam>
+            <typeparam name="TResult">The type of the result elements.</typeparam>
+            <param name="outer">The first sequence to left join.</param>
+            <param name="inner">The sequence to left join to the first sequence.</param>
+            <param name="outerKeySelector">A function to extract the left join key from each element of the first sequence.</param>
+            <param name="innerKeySelector">A function to extract the left join key from each element of the second sequence.</param>
+            <param name="resultSelector">A function to create a result element from two matching elements. The second element can be null or default.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> that has elements of type TResult
+            that are obtained by performing a left join on two sequences.</returns>
+            <exception cref="T:System.ArgumentNullException">outer or inner or outerKeySelector or innerKeySelector or resultSelector is null.</exception>
+        </member>
+        <member name="M:Foxy.Core.Linq.LinqExtensions.LeftJoin``4(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``1},System.Func{``0,``2},System.Func{``1,``2},System.Func{``0,``1,``3},System.Collections.Generic.IEqualityComparer{``2})">
+            <summary>
+            It returns all element from the outer enumerable and default (null)
+            from inner enumerable if no matching key found.
+            </summary>
+            <typeparam name="TOuter">The type of the elements of the first sequence.</typeparam>
+            <typeparam name="TInner">The type of the elements of the second sequence.</typeparam>
+            <typeparam name="TKey">The type of the keys returned by the key selector functions.</typeparam>
+            <typeparam name="TResult">The type of the result elements.</typeparam>
+            <param name="outer">The first sequence to left join.</param>
+            <param name="inner">The sequence to left join to the first sequence.</param>
+            <param name="outerKeySelector">A function to extract the left join key from each element of the first sequence.</param>
+            <param name="innerKeySelector">A function to extract the left join key from each element of the second sequence.</param>
+            <param name="resultSelector">A function to create a result element from two matching elements. The second element can be null or default.</param>
+            <param name="comparer">An <see cref="T:System.Collections.Generic.IEqualityComparer`1"/> to hash and compare keys.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> that has elements of type TResult
+            that are obtained by performing a left join on two sequences.</returns>
+            <exception cref="T:System.ArgumentNullException">outer or inner or outerKeySelector or innerKeySelector or resultSelector is null.</exception>
+        </member>
+        <member name="M:Foxy.Core.Linq.LinqExtensions.LeftJoin``4(System.Linq.IQueryable{``0},System.Linq.IQueryable{``1},System.Linq.Expressions.Expression{System.Func{``0,``2}},System.Linq.Expressions.Expression{System.Func{``1,``2}},System.Linq.Expressions.Expression{System.Func{``0,``1,``3}})">
+            <summary>
+            It returns all element from the outer enumerable and default (null)
+            from inner enumerable if no matching key found.
+            The default equality comparer is used to compare keys.
+            </summary>
+            <typeparam name="TOuter">The type of the elements of the first sequence.</typeparam>
+            <typeparam name="TInner">The type of the elements of the second sequence.</typeparam>
+            <typeparam name="TKey">The type of the keys returned by the key selector functions.</typeparam>
+            <typeparam name="TResult">The type of the result elements.</typeparam>
+            <param name="outer">The first sequence to left join.</param>
+            <param name="inner">The sequence to left join to the first sequence.</param>
+            <param name="outerKeySelector">A function to extract the left join key from each element of the first sequence.</param>
+            <param name="innerKeySelector">A function to extract the left join key from each element of the second sequence.</param>
+            <param name="resultSelector">A function to create a result element from two matching elements. The second element can be null or default.</param>
+            <returns>An <see cref="T:System.Linq.IQueryable`1"/> that contains elements of type TResult
+            obtained by performing a left join on two sequences.</returns>
+        </member>
+        <member name="M:Foxy.Core.Linq.LinqExtensions.LeftJoin``4(System.Linq.IQueryable{``0},System.Linq.IQueryable{``1},System.Linq.Expressions.Expression{System.Func{``0,``2}},System.Linq.Expressions.Expression{System.Func{``1,``2}},System.Linq.Expressions.Expression{System.Func{``0,``1,``3}},System.Collections.Generic.IEqualityComparer{``2})">
+            <summary>
+            It returns all element from the outer enumerable and default (null)
+            from inner enumerable if no matching key found.
+            </summary>
+            <typeparam name="TOuter">The type of the elements of the first sequence.</typeparam>
+            <typeparam name="TInner">The type of the elements of the second sequence.</typeparam>
+            <typeparam name="TKey">The type of the keys returned by the key selector functions.</typeparam>
+            <typeparam name="TResult">The type of the result elements.</typeparam>
+            <param name="outer">The first sequence to left join.</param>
+            <param name="inner">The sequence to left join to the first sequence.</param>
+            <param name="outerKeySelector">A function to extract the left join key from each element of the first sequence.</param>
+            <param name="innerKeySelector">A function to extract the left join key from each element of the second sequence.</param>
+            <param name="resultSelector">A function to create a result element from two matching elements. The second element can be null or default.</param>
+            <param name="comparer">An <see cref="T:System.Collections.Generic.IEqualityComparer`1"/> to hash and compare keys.</param>
+            <returns>An <see cref="T:System.Linq.IQueryable`1"/> that contains elements of type TResult
+            obtained by performing a left join on two sequences.</returns>
+        </member>
+        <member name="T:Foxy.Core.Text.NaturalStringComparer">
+            <summary>
+            Enhances string comparer with natural sorting functionality,
+            which allows it to sort numbers inside the strings as numbers, not as letters.
+            (e.g. "1", "2", "10" instead of "1", "10", "2")
+            </summary>
+        </member>
+        <member name="P:Foxy.Core.Text.NaturalStringComparer.CurrentCulture">
+            <summary>
+            Gets a <see cref="T:Foxy.Core.Text.NaturalStringComparer"/> object that performs 
+            a case-sensitive string comparison using the word comparison rules of 
+            the current culture.
+            </summary>
+        </member>
+        <member name="P:Foxy.Core.Text.NaturalStringComparer.CurrentCultureIgnoreCase">
+            <summary>
+            Gets a <see cref="T:Foxy.Core.Text.NaturalStringComparer"/> object that performs 
+            a case-insensitive string comparison using the word comparison rules of 
+            the current culture.
+            </summary>
+        </member>
+        <member name="P:Foxy.Core.Text.NaturalStringComparer.InvariantCulture">
+            <summary>
+            Gets a <see cref="T:Foxy.Core.Text.NaturalStringComparer"/> object that performs 
+            a case-sensitive string natural comparison using the word comparison rules of 
+            the invariant culture.
+            </summary>
+        </member>
+        <member name="P:Foxy.Core.Text.NaturalStringComparer.InvariantCultureIgnoreCase">
+            <summary>
+            Gets a <see cref="T:Foxy.Core.Text.NaturalStringComparer"/> object that performs 
+            a case-insensitive string natural comparison using the word comparison rules of 
+            the invariant culture.
+            </summary>
+        </member>
+        <member name="P:Foxy.Core.Text.NaturalStringComparer.Ordinal">
+            <summary>
+            Gets a <see cref="T:Foxy.Core.Text.NaturalStringComparer"/> object that performs 
+            a case-sensitive ordinal string natural comparison.
+            </summary>
+        </member>
+        <member name="P:Foxy.Core.Text.NaturalStringComparer.OrdinalIgnoreCase">
+            <summary>
+            Gets a <see cref="T:Foxy.Core.Text.NaturalStringComparer"/> object that performs 
+            a case-insensitive ordinal string natural comparison.
+            </summary>
+        </member>
+        <member name="M:Foxy.Core.Text.NaturalStringComparer.Create(System.Globalization.CultureInfo,System.Boolean)">
+            <summary>
+                Creates a <see cref="T:Foxy.Core.Text.NaturalStringComparer"/> object that compares 
+                strings according to the rules of a specified culture.
+            </summary>
+            <param name="culture">
+                A culture whose linguistic rules are used to perform a string 
+                natural comparison. If null then ordinal comparison will be used.
+            </param>
+            <param name="ignoreCase">
+                True to specify that comparison operations be case-insensitive; 
+                False to specify that comparison operations be case-sensitive.
+            </param>
+            <returns>
+                A new <see cref="T:Foxy.Core.Text.NaturalStringComparer"/> object that performs 
+                string natural comparisons according to the comparison rules used by 
+                the culture parameter and the case rule specified by the ignoreCase 
+                parameter.
+            </returns>
+        </member>
+        <member name="M:Foxy.Core.Text.NaturalStringComparer.Compare(System.String,System.String)">
+            <summary>
+            Compares two strings by natural order and returns a value indicating whether one is less than, equal to, or greater than the other.
+            </summary>
+            <param name="str1">The first string to compare.</param>
+            <param name="str2">The second string to compare.</param>
+            <returns>
+            A signed integer that indicates the relative values of x and y.
+            <para>If Less than zero then x is less than y.</para>
+            <para>If Zero	then x equals y.</para>
+            <para>If Greater than zero then x is greater than y.</para>
+            </returns>
+        </member>
+        <member name="M:Foxy.Core.Text.NaturalStringComparer.Equals(System.String,System.String)">
+            <summary>
+            Indicates whether two strings are equal.
+            </summary>
+            <param name="x">A string to compare to y.</param>
+            <param name="y">A string to compare to x.</param>
+            <returns>
+            true if x and y refer to the same string,
+            or contains the same text, or both x and y are null;
+            otherwise, false.
+            </returns>
+        </member>
+        <member name="M:Foxy.Core.Text.NaturalStringComparer.GetHashCode(System.String)">
+            <summary>
+            Gets the hash code for the specified string.
+            </summary>
+            <param name="obj">A string.</param>
+            <returns>
+            A 32-bit signed hash code calculated from the value of the obj parameter.
+            </returns>
+        </member>
+    </members>
+</doc>

@@ -101,6 +101,17 @@ namespace Foxy.Core.Text
             }
         }
 
+        /// <summary>
+        /// Compares two strings by natural order and returns a value indicating whether one is less than, equal to, or greater than the other.
+        /// </summary>
+        /// <param name="str1">The first string to compare.</param>
+        /// <param name="str2">The second string to compare.</param>
+        /// <returns>
+        /// A signed integer that indicates the relative values of x and y.
+        /// <para>If Less than zero then x is less than y.</para>
+        /// <para>If Zero	then x equals y.</para>
+        /// <para>If Greater than zero then x is greater than y.</para>
+        /// </returns>
         public override int Compare(string str1, string str2)
         {
             if (ReferenceEquals(str1, str2))
@@ -356,6 +367,16 @@ namespace Foxy.Core.Text
             return true;
         }
 
+        /// <summary>
+        /// Indicates whether two strings are equal.
+        /// </summary>
+        /// <param name="x">A string to compare to y.</param>
+        /// <param name="y">A string to compare to x.</param>
+        /// <returns>
+        /// true if x and y refer to the same string,
+        /// or contains the same text, or both x and y are null;
+        /// otherwise, false.
+        /// </returns>
         public override bool Equals(string x, string y)
         {
             if (_culture != null)
@@ -367,6 +388,13 @@ namespace Foxy.Core.Text
                 : StringComparison.Ordinal);
         }
 
+        /// <summary>
+        /// Gets the hash code for the specified string.
+        /// </summary>
+        /// <param name="obj">A string.</param>
+        /// <returns>
+        /// A 32-bit signed hash code calculated from the value of the obj parameter.
+        /// </returns>
         public override int GetHashCode(string obj)
         {
             if (obj is null)

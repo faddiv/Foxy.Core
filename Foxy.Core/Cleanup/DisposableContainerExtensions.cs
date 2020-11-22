@@ -7,6 +7,11 @@ namespace Foxy.Core.Cleanup
     /// </summary>
     public static partial class DisposableContainerExtensions
     {
+        /// <summary>
+        /// Adds an action that is executed on Dispose.
+        /// </summary>
+        /// <param name="container">The container to add the action.</param>
+        /// <param name="cleanupAction">the action to add.</param>
         public static void AddCleanupAction(this DisposableContainer container,
             Action cleanupAction)
         {

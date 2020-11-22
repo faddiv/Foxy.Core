@@ -28,7 +28,7 @@ namespace Foxy.Core.Cleanup
         }
 
         /// <summary>
-        /// Adds an IDisposable instance to the container which is disposed in the <see cref="Dispose"/>.
+        /// Adds an IDisposable instance to the container which is disposed in the <see cref="Dispose()"/>.
         /// </summary>
         /// <param name="disposabe"></param>
         public TDisposable AddManagedResource<TDisposable>(TDisposable disposabe)
@@ -44,32 +44,38 @@ namespace Foxy.Core.Cleanup
         /// </summary>
         public bool Disposed { get; private set; } = false;
 
+        /// <summary>
+        /// Releases the managed resources added to this container optionally.
+        /// </summary>
+        /// <param name="disposing">true to release managed resources.</param>
         [SuppressMessage("Design", "CA1031:Do not catch general exception types",
             Justification = "The exception handled in the eventhandler.")]
         protected virtual void Dispose(bool disposing)
         {
-            if (!Disposed)
+            if (Disposed) return;
+
+            if (disposing)
             {
-                if (disposing)
+                foreach (var disposable in _managedResources)
                 {
-                    foreach (var disposable in _managedResources)
+                    try
                     {
-                        try
-                        {
-                            disposable.Dispose();
-                            GC.SuppressFinalize(disposable);
-                        }
-                        catch (Exception ex)
-                        {
-                            DisposeFailed?.Invoke(disposable, ex);
-                        }
+                        disposable.Dispose();
+                        GC.SuppressFinalize(disposable);
+                    }
+                    catch (Exception ex)
+                    {
+                        DisposeFailed?.Invoke(disposable, ex);
                     }
                 }
-
-                Disposed = true;
             }
+
+            Disposed = true;
         }
 
+        /// <summary>
+        /// Does nothign
+        /// </summary>
         ~DisposableContainer()
         {
             Dispose(false);
